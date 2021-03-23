@@ -1,0 +1,8 @@
+html { height: 100%; }
+
+body { margin: 0; height: 100%; }
+
+page, .page { display: none; }
+page.active, .page.active { display: block; }
+
+input[type="file"] { display: none; }

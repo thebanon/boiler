@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,viewport-fit=cover">
+        <title>Boiler - Blank</title>
+    </head>
+    <body class="body" id="body">
+        
+        <boot data-href="/" id="boot"></boot>
+
+        <main class="body-main" id="body-main">
+            <div class="page" data-page="/"></div>
+        </main>
+
+        <input id="file" type="file">
+
+        <template data-href="/" id="page-index">Home Page</template>
+        
+        <script id="init">
+		loadScript([
+		  {link: "/index.css"}
+		]);
+		loadjs([
+		  {link: "/index.js"}
+		]);
+		function loadScript(links) { //console.log({links});
+		  var f = 0; do {
+			var link = ``; 
+			link += (links[f].link.includes('https:') ? `` : (window.location.protocol === "file:" ? `.` : ``));
+			link += links[f].link;
+			console.log(link,links[f].link.includes('https:'));
+			var sync = links[f].sync ? links[f].sync : ``;
+		  var script = ``;
+			if(link.includes('.css')) {
+			  script = `<link rel="stylesheet" href="`+link+`" `+sync+`>`;
+			}
+			if(link.includes('.js')) {
+			  script = `<script src="`+link+`" `+sync+`>`+atob('PC9zY3JpcHQ+');
+			}
+		  document.head.insertAdjacentHTML('beforeend',script);
+		  f++; } while(f < links.length); //console.log(script);
+		}
+		function loadjs(links) {
+		  var f = 0; do {
+			var script = document.createElement("script");
+			var link = ``; 
+			link += (links[f].link.includes('https:') ? `` : (window.location.protocol === "file:" ? `.` : ``));
+			link += links[f].link;
+			console.log(link,links[f].link.includes('https:'));
+			script.type = "text/javascript";
+			script.src = link;
+			//script.onload = (e) => console.log(e.path[0].src,"Script is ready!");
+			document.head.appendChild(script);
+		  f++; } while(f < links.length); //console.log(script);
+		  //document.head.insertAdjacentHTML('beforeend',script);
+		 }
+		</script>
+		<script>
+		function init(path) {
+		  dom.body.dataset.load = "ed";
+		  dom.body.dataset.protocol = window.location.protocol;
+		  if(path) {
+			path.router();
+		  } else {
+			if(window.location.protocol === "file:") {
+			  if(window.location.hash) {
+				window.location.hash.split('#')[1].router();
+			  } else {
+				byId('boot').dataset.href.router();
+			  }
+			} else {
+			  window.location.pathname.router();
+			}
+		  }
+		}
+		</script>
+    </body>
+</html>
